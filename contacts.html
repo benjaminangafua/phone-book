@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        main {
+            display: grid;
+            justify-content: center;
+        }
+        
+        table,
+        th,
+        tr,
+        td {
+            height: 2em;
+            /* width: 8px; */
+            /* table-layout: fixed; */
+            padding: 10px;
+            font-size: 17px;
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        /* BONUS */
+        /* Apply style to this page */
+    </style>
+</head>
+
+<body>
+    <main>
+        <section id="nav-bar">
+            <a href="/">View Contacts</a>
+            <a href="/contact/create">Create Contact</a>
+        </section>
+        <section id="contacts">
+            <!-- Display your names and contacts here -->
+            <div>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Contact</th>
+                    </tr>
+
+
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // TODO 
+        /**
+         * Make a GET request to the "contacts" route   
+         * From the result, display the names and contacts to the user
+         * You should use a table or list to display the items
+         */
+        getContact = () => {
+            fetch('/contacts')
+                .then((response) => response.json())
+                .then((data) => {
+                    for (let i = 0; i < data.row.length; i++) {
+                        let contact_info = data.row[i];
+                        console.log(contact_info)
+                        document.querySelector("table").insertAdjacentHTML("beforeend", `
+                            <tr> 
+                                <td>${contact_info.id}</th>
+                                <td>${contact_info.name}</th>
+                                <td>${contact_info.contact}</th>
+                            </tr>  
+                    `)
+                        console.log(data.row)
+                    }
+                })
+
+        }
+        getContact();
+    </script>
+</body>
+
+</html>

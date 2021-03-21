@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Contact</title>
+    <style>
+        main {
+            display: grid;
+            justify-content: center;
+        }
+        
+        input {
+            margin: 10px 0px;
+        }
+        /* BONUS */
+        /* Apply style to this page */
+    </style>
+</head>
+
+<body>
+    <main>
+        <section id="nav-bar">
+            <a href="/">View Contacts</a>
+            <a href="/contact/create">Create Contact</a>
+        </section>
+        <section id="form">
+            <form>
+                <input type="text" placeholder="Full Name" id="full-name">
+                <br>
+                <input type="text" placeholder="Contact" id="contact">
+                <br>
+                <button onclick="createContact()">Create</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        function createContact() {
+            // TODO
+
+            /**
+             * Get the value from the input elements
+             * Make a POST request to the route "create"
+             * Notify the user if the contact was created
+             */
+            let full_name = document.getElementById("full-name").value;
+            let contact = document.getElementById("contact").value;
+            let obj = {
+                full_name: full_name,
+                contact: contact
+            };
+            console.log(obj)
+            fetch('/create', {
+                    method: "POST",
+                    "Content-Type": "application/json",
+                    body: JSON.stringify(obj)
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    if (data.status === 0) {
+                        window.location.href = "/contact"
+                    }
+                })
+        }
+    </script>
+</body>
+
+</html>
