@@ -61,12 +61,12 @@ const server = http.createServer((req, res) => {
             if (err) {
                 console.error(err.message)
             }
-            res.end(JSON.stringify({ row, status: 0 }));
         });
         // TODO 3 
 
     } else {
-        res.end("404");
+        res.end("404")
+
     }
 })
 server.listen(3600, () => {
